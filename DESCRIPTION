@@ -1,0 +1,21 @@
+Package: preprosim
+Type: Package
+Title: Lightweight Data Quality Simulation for Classification
+Version: 0.1.0
+Date: 2016-04-30
+Authors@R: person("Markus", "Vattulainen", email = "markus.vattulainen@gmail.com", role = c("aut", "cre"))
+Description: Finding data quality attributes that have the biggest impact on
+    classification accuracy helps to focus data quality improvement effort. Simulating
+    data quality problems is also useful in testing algorithms and data preprocessing
+    techniques. This package provides initial understanding of how noise, missing values,
+    outlier, low variance, irrelevant features, class swap (inconsistency), class imbalance
+    and decrease in data volume affect classification accuracy. Little or no parameter
+    setting is needed.
+License: GPL-2
+LazyData: TRUE
+Imports:
+    rpart,
+    DMwR,
+    reshape2,
+    ggplot2,
+    plyr
