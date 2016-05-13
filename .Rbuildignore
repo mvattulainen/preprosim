@@ -1,2 +1,10 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+
+##^README\.Rmd$
+## ^README-.*\.png$
+
+## Ignore travis config file
+^\.travis\.yml$
+
+^.*\.gitignore$
