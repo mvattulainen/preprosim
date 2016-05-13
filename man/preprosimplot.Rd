@@ -4,7 +4,7 @@
 \alias{preprosimplot}
 \title{Plot data quality simulation results}
 \usage{
-preprosimplot(object, type, xaxis)
+preprosimplot(object, type)
 }
 \arguments{
 \item{object}{(preprosimanalysis class object) object to be plotted}

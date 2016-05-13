@@ -4,7 +4,7 @@
 \name{preprosimdefaultparam}
 \alias{preprosimdefaultparam}
 \title{preprosimdefaultparam}
-\format{\preformatted{Formal class 'preprosimparameter' [package "preprosim"] with 32 slots
+\format{\preformatted{Formal class 'preprosimparameter' [package "roxygen_devtest"] with 32 slots
   ..@ noisecol              : num 1
   ..@ noiseparam            : num [1:2] 0 0.5
   ..@ noiseorder            : num 1

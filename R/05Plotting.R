@@ -4,7 +4,7 @@
 #' @param object (preprosimanalysis class object) object to be plotted
 #' @export
 
-preprosimplot <- function(object, type, xaxis){
+preprosimplot <- function(object, type){
 
   if (type=="accuracy") {
 

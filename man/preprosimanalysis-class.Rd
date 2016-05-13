@@ -12,6 +12,8 @@ An S4 class to represent preprosim analysis output
 \describe{
 \item{\code{grid}}{(data frame) data frame consisting of combinations of preprosimparameters combinations}
 
+\item{\code{data}}{(list) list of simulated data sets}
+
 \item{\code{output}}{(numeric) vector of classification accuracies}
 
 \item{\code{variableimportance}}{(data frame) data frame consisting of variable importance values}

@@ -18,4 +18,6 @@ Imports:
     DMwR,
     reshape2,
     ggplot2,
-    plyr
+    plyr,
+    methods,
+    caret

@@ -18,22 +18,23 @@
 #'@slot irfeatureparam (numeric)
 #'@slot irfeatureorder (numeric)
 #'@slot irfeaturefunction (character)
+#'@slot classswapcol (numeric)
 #'@slot classswapparam (numeric)
 #'@slot classswaporder (numeric)
 #'@slot classswapfunction (character)
+#'@slot classimbalancecol (numeric)
 #'@slot classimbalanceparam (numeric)
 #'@slot classimbalanceorder (numeric)
 #'@slot classimbalancefunction (character)
+#'@slot volumedecreasecol (numeric)
 #'@slot volumedecreaseparam (numeric)
 #'@slot volumedecreaseorder (numeric)
 #'@slot volumedecreasefunction (character)
+#'@slot outliercol (numeric)
 #'@slot outlierparam (numeric)
 #'@slot outlierorder (numeric)
 #'@slot outlierfunction (character)
-
-
 #'@export
-
 setClass("preprosimparameter", representation(noisecol="numeric", noiseparam="numeric", noiseorder="numeric", noisefunction="character",
                                               lowvarcol="numeric", lowvarparam="numeric", lowvarorder="numeric", lowvarfunction="character",
                                               misvalcol="numeric", misvalparam="numeric", misvalorder="numeric", misvalfunction="character",
@@ -140,11 +141,11 @@ return(dataclassobject)
 #' An S4 class to represent preprosim analysis output
 #'
 #'@slot grid (data frame) data frame consisting of combinations of preprosimparameters combinations
+#'@slot data (list) list of simulated data sets
 #'@slot output (numeric) vector of classification accuracies
 #'@slot variableimportance (data frame) data frame consisting of variable importance values
 #'@slot outliers (numeric) vector of outlier scores
 #'@export
-#'
 setClass("preprosimanalysis", representation(grid="data.frame", data="list", output="numeric", variableimportance="data.frame", outliers="numeric"))
 
 

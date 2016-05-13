@@ -42,11 +42,15 @@ An S4 class to represent preprosimparameter
 
 \item{\code{irfeaturefunction}}{(character)}
 
+\item{\code{classswapcol}}{(numeric)}
+
 \item{\code{classswapparam}}{(numeric)}
 
 \item{\code{classswaporder}}{(numeric)}
 
 \item{\code{classswapfunction}}{(character)}
+
+\item{\code{classimbalancecol}}{(numeric)}
 
 \item{\code{classimbalanceparam}}{(numeric)}
 
@@ -54,11 +58,15 @@ An S4 class to represent preprosimparameter
 
 \item{\code{classimbalancefunction}}{(character)}
 
+\item{\code{volumedecreasecol}}{(numeric)}
+
 \item{\code{volumedecreaseparam}}{(numeric)}
 
 \item{\code{volumedecreaseorder}}{(numeric)}
 
 \item{\code{volumedecreasefunction}}{(character)}
+
+\item{\code{outliercol}}{(numeric)}
 
 \item{\code{outlierparam}}{(numeric)}
 

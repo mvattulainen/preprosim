@@ -21,5 +21,8 @@ preprosimdefaultparam <- new("preprosimparameter", noisecol=1, noiseparam=c(0, 0
 #' @import ggplot2
 NULL
 
+#' @importFrom methods setClass new prototype
+NULL
 
+globalVariables(c("accuracy","index", "variable", "value", "outlierscore"))
 
