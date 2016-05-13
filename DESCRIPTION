@@ -13,11 +13,13 @@ Description: Finding data quality attributes that have the biggest impact on
     setting is needed.
 License: GPL-2
 LazyData: TRUE
-Imports:
+Imports: 
     rpart,
     DMwR,
     reshape2,
     ggplot2,
     plyr,
     methods,
+    stats,
     caret
+Suggests: testthat
