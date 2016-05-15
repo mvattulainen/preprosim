@@ -9,7 +9,7 @@ changeparam(object, contamination, param, value)
 \arguments{
 \item{object}{(preprosimparameter object)}
 
-\item{contamination}{(character) one of the following: noise, lowvar, misvalue, irfeature}
+\item{contamination}{(character) one of the following: noise, lowvar, misvalue, irfeature, classswap, classimbalance, volumedecrease, outlier}
 
 \item{param}{(character) one of the following: cols, param, order}
 
@@ -17,5 +17,11 @@ changeparam(object, contamination, param, value)
 }
 \description{
 Change preprosimparametes
+}
+\examples{
+## res <- newparam()
+## res <- changeparam(res, "noise", "cols", value=1)
+## res <- changeparam(res, "noise", "param", value=c(0,0.1))
+## res <- changeparam(res, "noise", "order", value=1)
 }
 

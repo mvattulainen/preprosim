@@ -34,7 +34,6 @@
 #'@slot outlierparam (numeric)
 #'@slot outlierorder (numeric)
 #'@slot outlierfunction (character)
-#'@export
 setClass("preprosimparameter", representation(noisecol="numeric", noiseparam="numeric", noiseorder="numeric", noisefunction="character",
                                               lowvarcol="numeric", lowvarparam="numeric", lowvarorder="numeric", lowvarfunction="character",
                                               misvalcol="numeric", misvalparam="numeric", misvalorder="numeric", misvalfunction="character",
@@ -49,13 +48,33 @@ setClass("preprosimparameter", representation(noisecol="numeric", noiseparam="nu
                    volumedecreasefunction="volumedecreasefunction(data, param)", outlierfunction="outlierfunction(data, param)")
 )
 
-
+#' Create new preprosimparameter object
+#' @return preprosimparameter class object
+#' @details all columns, parameters and order are set to zero
+#' @examples
+#' ## res <- newparam()
+#' @export
+newparam <- function(){
+  object <- new("preprosimparameter", noisecol=0, noiseparam=0, noiseorder=0,
+                  lowvarcol=0, lowvarparam=0, lowvarorder=0,
+                  misvalcol=0, misvalparam=0, misvalorder=0,
+                  irfeaturecol=0, irfeatureparam=0, irfeatureorder=0,
+                  classswapcol=0, classswapparam=0, classswaporder=0,
+                  classimbalancecol=0, classimbalanceparam=0, classimbalanceorder=0,
+                  volumedecreasecol=0, volumedecreaseparam=0, volumedecreaseorder=0,
+                  outliercol=0, outlierparam=0, outlierorder=0)
+}
 
 #' Change preprosimparametes
 #' @param object (preprosimparameter object)
-#' @param contamination (character) one of the following: noise, lowvar, misvalue, irfeature
+#' @param contamination (character) one of the following: noise, lowvar, misvalue, irfeature, classswap, classimbalance, volumedecrease, outlier
 #' @param param (character) one of the following: cols, param, order
 #' @param value (numeric) vector of parameter values
+#' @examples
+#' ## res <- newparam()
+#' ## res <- changeparam(res, "noise", "cols", value=1)
+#' ## res <- changeparam(res, "noise", "param", value=c(0,0.1))
+#' ## res <- changeparam(res, "noise", "order", value=1)
 #' @export
 
 changeparam <- function(object, contamination, param, value) {
@@ -126,7 +145,6 @@ changeparam <- function(object, contamination, param, value) {
 #'
 #'@slot x (data frame) data frame consisting of numeric features
 #'@slot y (factor) vector of class labels
-#'@export
 
 setClass("preprosimdata", representation(x="data.frame", y="factor"))
 
@@ -140,12 +158,11 @@ return(dataclassobject)
 
 #' An S4 class to represent preprosim analysis output
 #'
-#'@slot grid (data frame) data frame consisting of combinations of preprosimparameters combinations
+#'@slot grid (data frame) data frame consisting of combinations of preprosimparameters
 #'@slot data (list) list of simulated data sets
 #'@slot output (numeric) vector of classification accuracies
 #'@slot variableimportance (data frame) data frame consisting of variable importance values
 #'@slot outliers (numeric) vector of outlier scores
-#'@export
 setClass("preprosimanalysis", representation(grid="data.frame", data="list", output="numeric", variableimportance="data.frame", outliers="numeric"))
 
 

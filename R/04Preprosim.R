@@ -1,13 +1,18 @@
 
 #' Run data quality simulation
-#' @param seed (integer) seed to be used for reproducible results
+#' @param seed (integer) seed to be used for reproducible results, defaults to 1
 #' @param data (data frame) one factor columns for class labels, other columns numeric, no missing values
 #' @param param (preprosimparameter object) simulation parameters, defaults to preprosimdefaultparameters
-#' @param holdoutrounds (integer) number of holdout rounds,default to 10
+#' @param holdoutrounds (integer) number of holdout rounds,defaults to 10
 #' @return preprosimanalysis class object
+#' @examples
+#' ## res1 <- preprosimrun(iris, holdoutrounds=3) # RUNTIME SIX MINUTES on Intel Celeron 1.4 GHz
+#' ## res2 <- preprosimrun(iris, preprosimdefaultparam, seed=10, holdoutrounds=20)
 #' @export
 
 preprosimrun <- function(data, param=preprosimdefaultparam, seed=1, holdoutrounds=10) {
+
+  print("Creation of data sets in progress.")
 
   set.seed(seed)
 
@@ -79,7 +84,8 @@ preprosimrun <- function(data, param=preprosimdefaultparam, seed=1, holdoutround
 
 }
 
-
+  print("Creation of data sets completed.")
+  print("Computation of classification accuracies in progress.")
 
 
 
@@ -88,12 +94,14 @@ preprosimrun <- function(data, param=preprosimdefaultparam, seed=1, holdoutround
 
 output <- vector("numeric", length=nrow(q))
 varimportance <- vector("list", length=nrow(q))
-accuracy <- numeric(10)
 
-for (i in 1:1) #nrow(q))
+
+for (i in 1:nrow(q))
 
 {
-      for (j in 1:10){
+  accuracy <- numeric()
+
+      for (j in 1:holdoutrounds){
         training <- caret::createDataPartition(e[[i]]@y, times = 1, p = 0.66, list=FALSE)
         model <- rpart::rpart(e[[i]]@y[training] ~., e[[i]]@x[training,])
         testPred <- predict(model, e[[i]]@x[-training,], type="class")
@@ -126,6 +134,8 @@ preprosimobject@data <- e
 preprosimobject@output <- output
 preprosimobject@variableimportance <- varimportance
 preprosimobject@outliers <- outlier.scores
+
+print("Computation of classification accuracies completed.")
 
 preprosimobject
 }

@@ -12,14 +12,18 @@ preprosimrun(data, param = preprosimdefaultparam, seed = 1,
 
 \item{param}{(preprosimparameter object) simulation parameters, defaults to preprosimdefaultparameters}
 
-\item{seed}{(integer) seed to be used for reproducible results}
+\item{seed}{(integer) seed to be used for reproducible results, defaults to 1}
 
-\item{holdoutrounds}{(integer) number of holdout rounds,default to 10}
+\item{holdoutrounds}{(integer) number of holdout rounds,defaults to 10}
 }
 \value{
 preprosimanalysis class object
 }
 \description{
 Run data quality simulation
+}
+\examples{
+## res1 <- preprosimrun(iris, holdoutrounds=3) # RUNTIME SIX MINUTES on Intel Celeron 1.4 GHz
+## res2 <- preprosimrun(iris, preprosimdefaultparam, seed=10, holdoutrounds=20)
 }
 

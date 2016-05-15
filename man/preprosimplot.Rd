@@ -4,14 +4,26 @@
 \alias{preprosimplot}
 \title{Plot data quality simulation results}
 \usage{
-preprosimplot(object, type)
+preprosimplot(object, type = "accuracy", x, z)
 }
 \arguments{
 \item{object}{(preprosimanalysis class object) object to be plotted}
 
-\item{type}{(character) type of plot: accuracy, varimportance, outliers}
+\item{type}{(character) type of plot: accuracy, varimportance, outliers or xz}
+
+\item{x}{(character) x axis contamination}
+
+\item{z}{(character) z axis contamination plotted as panels}
 }
 \description{
 Plot data quality simulation results
+}
+\details{
+contaminations are : noise, lowvar, misval, irfeature, classswap, classimbalance, volumedecrease, outlier
+}
+\examples{
+## res <- preprosimrun(iris)
+## preprosimplot(res)
+## preprosimplot(res, type="xz", x="misval", z="noise")
 }
 

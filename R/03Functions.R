@@ -6,14 +6,15 @@ noisefunction <- function(data, param)
 {
   if (param@noiseparam==0){return(data)}
 
-  newdata <- apply(data@x[param@noisecol], 2, function(x) noise(x, param))
+  newdata <- apply(data@x[param@noisecol], 2, function(x) noise(x, param@noiseparam))
   newdata <- lapply(seq_len(ncol(newdata)), function(i) newdata[,i])
   data@x[param@noisecol] <- newdata
   data
 }
 
-noise <- function(x, param){newvalue <- rnorm(length(x), x, param@noiseparam)}
-
+noise <- function(x, param){
+  r <- x + runif(length(x), param-param*x, param+param*x)
+}
 # Add low variance
 
 lowvarfunction <- function(data, param) {
@@ -46,8 +47,10 @@ misvalfunction <- function(data, param) {
 
 misvalue <- function(x, missingvaluesparameter) {
 
-  x[sample(c(TRUE, NA), prob = c(1-missingvaluesparameter, missingvaluesparameter), size = length(x), replace = TRUE)]
-
+  numberofmissingvalue <- floor(missingvaluesparameter*length(x))
+  positionstomissingvalue <- sample(1:length(x), numberofmissingvalue)
+  x[positionstomissingvalue] <- NA
+  x
 }
 
 irfeaturefunction <- function(data, param) {
@@ -55,6 +58,9 @@ irfeaturefunction <- function(data, param) {
   if (param@irfeatureparam==0){return(data)}
 
   numberofirrelevantfeatures <- as.integer(param@irfeatureparam * ncol(data@x))
+
+  if (numberofirrelevantfeatures==0){return(data)}
+
   basedata <- data@x
 
     for (i in 1:numberofirrelevantfeatures)

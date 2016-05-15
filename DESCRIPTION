@@ -2,18 +2,14 @@ Package: preprosim
 Type: Package
 Title: Lightweight Data Quality Simulation for Classification
 Version: 0.1.0
-Date: 2016-04-30
+Date: 2016-05-15
 Authors@R: person("Markus", "Vattulainen", email = "markus.vattulainen@gmail.com", role = c("aut", "cre"))
-Description: Finding data quality attributes that have the biggest impact on
-    classification accuracy helps to focus data quality improvement effort. Simulating
-    data quality problems is also useful in testing algorithms and data preprocessing
-    techniques. This package provides initial understanding of how noise, missing values,
-    outlier, low variance, irrelevant features, class swap (inconsistency), class imbalance
-    and decrease in data volume affect classification accuracy. Little or no parameter
-    setting is needed.
+Description: The package provides a function for quick sensitivity check of how adding of noise, missing
+    values, outliers, low variance, irrelevant features, class swap (inconsistency), class imbalance
+    and decrease in data volume affect classification accuracy for 'rpart' classification tree.
 License: GPL-2
 LazyData: TRUE
-Imports: 
+Imports:
     rpart,
     DMwR,
     reshape2,
@@ -22,4 +18,9 @@ Imports:
     methods,
     stats,
     caret
-Suggests: testthat
+Suggests:
+    testthat,
+    preprocomb,
+    preproviz
+URL: https://github.com/mvattulainen/preprosim
+BugReports: https://github.com/mvattulainen/preprosim/issues

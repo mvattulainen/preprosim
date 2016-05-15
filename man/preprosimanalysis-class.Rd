@@ -10,7 +10,7 @@ An S4 class to represent preprosim analysis output
 \section{Slots}{
 
 \describe{
-\item{\code{grid}}{(data frame) data frame consisting of combinations of preprosimparameters combinations}
+\item{\code{grid}}{(data frame) data frame consisting of combinations of preprosimparameters}
 
 \item{\code{data}}{(list) list of simulated data sets}
 

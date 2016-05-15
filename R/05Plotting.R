@@ -1,10 +1,17 @@
 
 #' Plot data quality simulation results
-#' @param type (character) type of plot: accuracy, varimportance, outliers
+#' @param type (character) type of plot: accuracy, varimportance, outliers or xz
 #' @param object (preprosimanalysis class object) object to be plotted
+#' @param x (character) x axis contamination
+#' @param z (character) z axis contamination plotted as panels
+#' @details contaminations are : noise, lowvar, misval, irfeature, classswap, classimbalance, volumedecrease, outlier
+#' @examples
+#' ## res <- preprosimrun(iris)
+#' ## preprosimplot(res)
+#' ## preprosimplot(res, type="xz", x="misval", z="noise")
 #' @export
 
-preprosimplot <- function(object, type){
+preprosimplot <- function(object, type="accuracy", x, z){
 
   if (type=="accuracy") {
 
@@ -28,10 +35,7 @@ preprosimplot <- function(object, type){
 
   }
 
-  if (type=="accuracybyx") {
-
-    x <- "misval"
-    z <- "noise"
+  if (type=="xz") {
 
     selection <- paste("grid.",x, sep="")
     selectionz <- paste("grid.",z, sep="")
