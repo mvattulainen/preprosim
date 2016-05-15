@@ -4,9 +4,11 @@ Title: Lightweight Data Quality Simulation for Classification
 Version: 0.1.0
 Date: 2016-05-15
 Authors@R: person("Markus", "Vattulainen", email = "markus.vattulainen@gmail.com", role = c("aut", "cre"))
-Description: The package provides a function for quick sensitivity check of how adding of noise, missing
-    values, outliers, low variance, irrelevant features, class swap (inconsistency), class imbalance
-    and decrease in data volume affect classification accuracy for 'rpart' classification tree.
+Description: Data quality simulation is needed to check the robustness of data analysis findings and
+    learn about the relationship between input variables and output. This package helps to add contaminations
+    (noise, missing values, outliers, low variance, irrelevant features, class swap (inconsistency), class imbalance
+    and decrease in data volume) to original data and then evalute the simulated ata sets for classification accuracy.
+    Simulation runs can be set up with minimal up-front effort and results plotted.
 License: GPL-2
 LazyData: TRUE
 Imports:
