@@ -13,5 +13,7 @@ An S4 class to represent preprosim data
 \item{\code{x}}{(data frame) data frame consisting of numeric features}
 
 \item{\code{y}}{(factor) vector of class labels}
+
+\item{\code{z}}{(boolean) safe for classification (i.e. no NAs)}
 }}
 

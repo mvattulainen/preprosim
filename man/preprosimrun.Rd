@@ -4,17 +4,21 @@
 \alias{preprosimrun}
 \title{Run data quality simulation}
 \usage{
-preprosimrun(data, param = preprosimdefaultparam, seed = 1,
-  holdoutrounds = 10)
+preprosimrun(data, param = newparam(data, "default"), seed = 1,
+  caretmodel = "gbm", holdoutrounds = 10, cores = 1)
 }
 \arguments{
 \item{data}{(data frame) one factor columns for class labels, other columns numeric, no missing values}
 
-\item{param}{(preprosimparameter object) simulation parameters, defaults to preprosimdefaultparameters}
+\item{param}{(preprosimparameter object) simulation parameters, defaults to parameters set automatically for data.}
 
 \item{seed}{(integer) seed to be used for reproducible results, defaults to 1}
 
-\item{holdoutrounds}{(integer) number of holdout rounds,defaults to 10}
+\item{caretmodel}{(character) a model from package Caret, defaults to gbm (gbm must be installed before preprosimrun)}
+
+\item{holdoutrounds}{(integer) number of holdout rounds, defaults to 10}
+
+\item{cores}{(integer) number of cores used in parallel processing, defaults to 1}
 }
 \value{
 preprosimanalysis class object
@@ -23,7 +27,8 @@ preprosimanalysis class object
 Run data quality simulation
 }
 \examples{
-## res1 <- preprosimrun(iris, holdoutrounds=3) # RUNTIME SIX MINUTES on Intel Celeron 1.4 GHz
-## res2 <- preprosimrun(iris, preprosimdefaultparam, seed=10, holdoutrounds=20)
+## res <- preprosimrun(iris)
+## res1 <- preprosimrun(iris, param=newparam(iris, "custom", x="misval", z="noise"), cores=2)
+## res2 <- preprosimrun(iris, caretmodel="rpart")
 }
 

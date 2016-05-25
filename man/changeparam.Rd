@@ -13,10 +13,13 @@ changeparam(object, contamination, param, value)
 
 \item{param}{(character) one of the following: cols, param, order}
 
-\item{value}{(numeric) vector of parameter values}
+\item{value}{(numeric) scalar (for order) or vector (for cols and param) of parameter values}
 }
 \description{
 Change preprosimparametes
+}
+\details{
+The order of contaminations (cols parameter) must be between 1 and 8, and no two contaminations can have the same order
 }
 \examples{
 ## res <- newparam()

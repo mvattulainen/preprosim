@@ -49,27 +49,77 @@ setClass("preprosimparameter", representation(noisecol="numeric", noiseparam="nu
 )
 
 #' Create new preprosimparameter object
+#' @param dataframe (data frame) original data to be used in simulations
+#' @param type (character) creation type: empty, default or custom, defaults to "default"
+#' @param x (character) primary contamination of interest such as "misval"
+#' @param z (character) secondary contamination of interest such as "noise"
 #' @return preprosimparameter class object
-#' @details all columns, parameters and order are set to zero
+#' @details empty creates a preprosimparamater object with empty params; default
+#' @details an object with 6561 combinations all params 0, 0.1, 0.2; custom creates
+#' @details params seq(0, 0.9, by 0.1) for primary and 0., 0.1, 0.2 for secondary
 #' @examples
-#' ## res <- newparam()
+#' ## res <- newparam(iris)
+#' ## res <- newparam(iris, "empty")
+#' ## res <- newparam(iris, "custom", "misval", "noise")
 #' @export
-newparam <- function(){
-  object <- new("preprosimparameter", noisecol=0, noiseparam=0, noiseorder=0,
-                  lowvarcol=0, lowvarparam=0, lowvarorder=0,
-                  misvalcol=0, misvalparam=0, misvalorder=0,
-                  irfeaturecol=0, irfeatureparam=0, irfeatureorder=0,
-                  classswapcol=0, classswapparam=0, classswaporder=0,
-                  classimbalancecol=0, classimbalanceparam=0, classimbalanceorder=0,
-                  volumedecreasecol=0, volumedecreaseparam=0, volumedecreaseorder=0,
-                  outliercol=0, outlierparam=0, outlierorder=0)
+newparam <- function(dataframe, type="default", x, z){
+
+  test <- createdata(dataframe)
+  allcols <- 1:ncol(test@x)
+  randcols <- sample(allcols, 2)
+
+  if (type=="empty") {
+
+  object <- new("preprosimparameter", noisecol=allcols, noiseparam=0, noiseorder=1,
+                  lowvarcol=randcols[1], lowvarparam=0, lowvarorder=2,
+                  misvalcol=allcols, misvalparam=0, misvalorder=8,
+                  irfeaturecol=0, irfeatureparam=0, irfeatureorder=4,
+                  classswapcol=0, classswapparam=0, classswaporder=5,
+                  classimbalancecol=0, classimbalanceparam=0, classimbalanceorder=6,
+                  volumedecreasecol=0, volumedecreaseparam=0, volumedecreaseorder=7,
+                  outliercol=randcols[2], outlierparam=0, outlierorder=3)
+
+  }
+
+  if (type=="default") {
+
+  object <- new("preprosimparameter", noisecol=allcols, noiseparam=c(0, 0.1, 0.2), noiseorder=1,
+                  lowvarcol=randcols[1], lowvarparam=c(0, 0.1, 0.2), lowvarorder=2,
+                  misvalcol=allcols, misvalparam=c(0, 0.1, 0.2), misvalorder=8,
+                  irfeaturecol=0, irfeatureparam=c(0, 0.1, 0.2), irfeatureorder=4,
+                  classswapcol=0, classswapparam=c(0, 0.1, 0.2), classswaporder=5,
+                  classimbalancecol=0, classimbalanceparam=c(0, 0.1, 0.2), classimbalanceorder=6,
+                  volumedecreasecol=0, volumedecreaseparam=c(0, 0.1, 0.2), volumedecreaseorder=7,
+                  outliercol=randcols[2], outlierparam=c(0, 0.1, 0.2), outlierorder=3)
+
+  }
+
+  if (type=="custom") {
+
+    object <- new("preprosimparameter", noisecol=allcols, noiseparam=0, noiseorder=1,
+                  lowvarcol=randcols[1], lowvarparam=0, lowvarorder=2,
+                  misvalcol=allcols, misvalparam=0, misvalorder=8,
+                  irfeaturecol=0, irfeatureparam=0, irfeatureorder=4,
+                  classswapcol=0, classswapparam=0, classswaporder=5,
+                  classimbalancecol=0, classimbalanceparam=0, classimbalanceorder=6,
+                  volumedecreasecol=0, volumedecreaseparam=0, volumedecreaseorder=7,
+                  outliercol=randcols[2], outlierparam=0, outlierorder=3)
+
+    object <- changeparam(object, x, "param", value=seq(0, 0.9, by=0.1))
+    object <- changeparam(object, z, "param", value=c(0, 0.1, 0.2))
+  }
+
+  validatepreprosimparameters(object)
+
+  object
 }
 
 #' Change preprosimparametes
 #' @param object (preprosimparameter object)
 #' @param contamination (character) one of the following: noise, lowvar, misvalue, irfeature, classswap, classimbalance, volumedecrease, outlier
 #' @param param (character) one of the following: cols, param, order
-#' @param value (numeric) vector of parameter values
+#' @param value (numeric) scalar (for order) or vector (for cols and param) of parameter values
+#' @details The order of contaminations (cols parameter) must be between 1 and 8, and no two contaminations can have the same order
 #' @examples
 #' ## res <- newparam()
 #' ## res <- changeparam(res, "noise", "cols", value=1)
@@ -135,8 +185,39 @@ changeparam <- function(object, contamination, param, value) {
     if (param=="order") {object@outlierorder <- value}
   }
 
+  validatepreprosimparameters(object)
+
   object
 
+}
+
+validatepreprosimparameters <- function(object){
+
+  exeorder <- getexecutionorder(object)
+
+  isunique <- !any(duplicated(exeorder))
+  isinrange <- range(exeorder)[1]==1 & range(exeorder)[2]==8
+
+  if (isunique==FALSE) {stop("No two contaminations can have the same execution order.")}
+  if (isinrange==FALSE) {stop("Contamination orders must start from 1 and end to 8.")}
+
+}
+
+getexecutionorder <- function(object){
+
+  paramslots <- names(getSlots("preprosimparameter"))
+
+  cols <- grep("col", paramslots)
+  params <- grep("param", paramslots)
+  orders <- grep("order", paramslots)
+
+  exeorder <- numeric()
+  for (i in 1:length(orders))
+  {
+    exeorder[i] <- slot(object, paramslots[orders[i]])
+  }
+
+  exeorder
 }
 
 
@@ -145,16 +226,34 @@ changeparam <- function(object, contamination, param, value) {
 #'
 #'@slot x (data frame) data frame consisting of numeric features
 #'@slot y (factor) vector of class labels
+#'@slot z (boolean) safe for classification (i.e. no NAs)
 
-setClass("preprosimdata", representation(x="data.frame", y="factor"))
+setClass("preprosimdata", representation(x="data.frame", y="factor",z="logical"))
 
 createdata <- function(data) {
+
+if(class(data)!="data.frame"){stop("Argument 'data' must be a data frame.")}
+if(sum(sapply(data, is.factor)==TRUE)!=1) {stop("Argument 'data' must have one and only one factor column.")}
+if(sum(sapply(data, is.numeric)==TRUE)!=ncol(data)-1) {stop("Argument 'data' must have only numeric columns and one factor column.")}
+if(any(apply(data, 1:2, is.na))==TRUE) {stop("Argument 'data' must not have missing values.")}
 
 dataclassobject <- new("preprosimdata")
 dataclassobject@x <- data[sapply(data, is.numeric)]
 dataclassobject@y <- factor(data[sapply(data, is.factor)][,1])
 return(dataclassobject)
 }
+
+validatedata <- function(data){
+
+  hasvariance <- length(caret::nearZeroVar(data@x))==0
+  hasonlyfinite <- !any(apply(data@x, 1:2, function(x) x=="Inf" | x=="-Inf"))
+  hasnotnans <- !any(apply(data@x, 1:2, is.nan))
+
+  issafe <- all(hasvariance, hasonlyfinite, hasnotnans)
+  data@z <- issafe
+  data
+}
+
 
 #' An S4 class to represent preprosim analysis output
 #'
@@ -164,5 +263,6 @@ return(dataclassobject)
 #'@slot variableimportance (data frame) data frame consisting of variable importance values
 #'@slot outliers (numeric) vector of outlier scores
 setClass("preprosimanalysis", representation(grid="data.frame", data="list", output="numeric", variableimportance="data.frame", outliers="numeric"))
+
 
 

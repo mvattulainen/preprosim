@@ -6,15 +6,17 @@ noisefunction <- function(data, param)
 {
   if (param@noiseparam==0){return(data)}
 
-  newdata <- apply(data@x[param@noisecol], 2, function(x) noise(x, param@noiseparam))
+  newdata <- apply(data@x[param@noisecol], 2, function(x) noise(x, param))
   newdata <- lapply(seq_len(ncol(newdata)), function(i) newdata[,i])
   data@x[param@noisecol] <- newdata
   data
 }
 
 noise <- function(x, param){
-  r <- x + runif(length(x), param-param*x, param+param*x)
+
+r <- rnorm(length(x), x, param@noiseparam)
 }
+
 # Add low variance
 
 lowvarfunction <- function(data, param) {

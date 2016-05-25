@@ -4,23 +4,24 @@ Title: Lightweight Data Quality Simulation for Classification
 Version: 0.1.0
 Date: 2016-05-15
 Authors@R: person("Markus", "Vattulainen", email = "markus.vattulainen@gmail.com", role = c("aut", "cre"))
-Description: Data quality simulation is needed to check the robustness of data analysis findings and
-    learn about the relationship between input variables and output. This package helps to add contaminations
+Description: Data quality simulation can be used to check the robustness of data analysis findings and
+    learn about the impact of data quality contaminations on classification. This package helps to add contaminations
     (noise, missing values, outliers, low variance, irrelevant features, class swap (inconsistency), class imbalance
-    and decrease in data volume) to original data and then evalute the simulated ata sets for classification accuracy.
-    Simulation runs can be set up with minimal up-front effort and results plotted.
+    and decrease in data volume) to data and then evaluate the simulated data sets for classification accuracy.
+    As a ligthweight solution simulation runs can be set up with no or minimal up-front effort.
 License: GPL-2
 LazyData: TRUE
 Imports:
-    rpart,
     DMwR,
     reshape2,
     ggplot2,
-    plyr,
     methods,
     stats,
-    caret
+    caret,
+    doParallel,
+    foreach
 Suggests:
+    gbm,
     testthat,
     preprocomb,
     preproviz

@@ -4,7 +4,16 @@
 \alias{newparam}
 \title{Create new preprosimparameter object}
 \usage{
-newparam()
+newparam(dataframe, type = "default", x, z)
+}
+\arguments{
+\item{dataframe}{(data frame) original data to be used in simulations}
+
+\item{type}{(character) creation type: empty, default or custom, defaults to "default"}
+
+\item{x}{(character) primary contamination of interest such as "misval"}
+
+\item{z}{(character) secondary contamination of interest such as "noise"}
 }
 \value{
 preprosimparameter class object
@@ -13,9 +22,11 @@ preprosimparameter class object
 Create new preprosimparameter object
 }
 \details{
-all columns, parameters and order are set to zero
+empty creates a preprosimparamater object with empty params; default
 }
 \examples{
-## res <- newparam()
+## res <- newparam(iris)
+## res <- newparam(iris, "empty")
+## res <- newparam(iris, "custom", "misval", "noise")
 }
 
