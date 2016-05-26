@@ -3,9 +3,9 @@
 \docType{class}
 \name{preprosimparameter-class}
 \alias{preprosimparameter-class}
-\title{An S4 class to represent preprosimparameter}
+\title{An S4 class to represent preprosim parameters}
 \description{
-An S4 class to represent preprosimparameter
+An S4 class to represent preprosim parameters
 }
 \section{Slots}{
 

@@ -9,17 +9,24 @@ changeparam(object, contamination, param, value)
 \arguments{
 \item{object}{(preprosimparameter object)}
 
-\item{contamination}{(character) one of the following: noise, lowvar, misvalue, irfeature, classswap, classimbalance, volumedecrease, outlier}
+\item{contamination}{(character) one of the following: noise, lowvar, misval, irfeature, classswap, classimbalance, volumedecrease, outlier}
 
 \item{param}{(character) one of the following: cols, param, order}
 
 \item{value}{(numeric) scalar (for order) or vector (for cols and param) of parameter values}
 }
+\value{
+preprosimparameter class object
+}
 \description{
-Change preprosimparametes
+Preprosim parameter objects contain eight contaminations: noise, lowvar, misval, irfeature, classswap, classimbalance, volumedecrease and outlier.
+Each contamination has three sub parameters: cols as columns the contamination is applied to, param as the
+parameter of the contaminations itself (i.e. intensity of contamination) and order as order in which the parameter
+is applied to the data.
 }
 \details{
-The order of contaminations (cols parameter) must be between 1 and 8, and no two contaminations can have the same order
+The order of contaminations (cols parameter) must be between 1 and 8, and no two contaminations can have the same order.
+The contamination parameter (param parameter) must start with 0 (e.g. param="param", value=c(0,0.3))
 }
 \examples{
 ## res <- newparam()

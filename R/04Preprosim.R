@@ -6,19 +6,19 @@
 #' @param caretmodel (character) a model from package Caret, defaults to gbm (gbm must be installed before preprosimrun)
 #' @param holdoutrounds (integer) number of holdout rounds, defaults to 10
 #' @param cores (integer) number of cores used in parallel processing, defaults to 1
+#' @param verbose (boolean) progress information outputted, defaults to TRUE
 #' @return preprosimanalysis class object
+#' @details caretmodel must be able to deal with missing values and preferably have in-build variable importance
+#' such as rpart and gbm. Note: caret message will be outputted regardless of verbose.
 #' @examples
 #' ## res <- preprosimrun(iris)
 #' ## res1 <- preprosimrun(iris, param=newparam(iris, "custom", x="misval", z="noise"), cores=2)
 #' ## res2 <- preprosimrun(iris, caretmodel="rpart")
 #' @export
 
-preprosimrun <- function(data, param=newparam(data, "default"), seed=1, caretmodel="gbm", holdoutrounds=10, cores=1) {
+preprosimrun <- function(data, param=newparam(data, "default"), seed=1, caretmodel="gbm", holdoutrounds=10, cores=1, verbose=TRUE) {
 
   doParallel::registerDoParallel(cores=cores)
-
-
-  print("Creation of data sets in progress.")
 
   set.seed(seed)
 
@@ -90,15 +90,9 @@ preprosimrun <- function(data, param=newparam(data, "default"), seed=1, caretmod
 
   }
 
-  print("Data sets created.")
-  print("Validating the data sets.")
-  #r <- lapply(e, validatedata)
-  print("Data sets validated.")
-  print("Computing classification accuracies.")
-
 ## MODEL FITTING: CLASSIFICATION ACCURACY AND VARIABLE IMPORTANCE
 
-output <- fitmodels(e, caretmodel, holdoutrounds)
+output <- fitmodels(e, caretmodel, holdoutrounds, verbose)
 
 doParallel::stopImplicitCluster()
 
@@ -127,7 +121,7 @@ for (i in 1:length(newlist))
   newlist[[i]] <- newdf
 }
 
-varimportance <- data.frame(t(do.call(cbind, newlist)))
+varimportance <- suppressWarnings(data.frame(t(do.call(cbind, newlist))))
 
 # outlier score
 expdata <- data.frame(output[[1]], q)
@@ -141,8 +135,6 @@ preprosimobject@data <- e
 preprosimobject@output <- output[[1]]
 preprosimobject@variableimportance <- varimportance
 preprosimobject@outliers <- outlier.scores
-
-print("Classification accuracies computed.")
 
 preprosimobject
 }
