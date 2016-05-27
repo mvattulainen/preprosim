@@ -13,5 +13,5 @@ NULL
 #'@import foreach
 NULL
 
-globalVariables(c("accuracy","index", "variable", "value", "outlierscore", "%dopar%", "foreach"))
+globalVariables(c("accuracy","index", "variable", "value", "outlierscore", "%dopar%", "foreach", "j"))
 

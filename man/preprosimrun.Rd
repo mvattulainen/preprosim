@@ -30,7 +30,7 @@ Run data quality simulation
 }
 \details{
 caretmodel must be able to deal with missing values and preferably have in-build variable importance
-such as rpart and gbm.
+such as rpart and gbm. Note: caret message will be outputted regardless of verbose.
 }
 \examples{
 ## res <- preprosimrun(iris)
