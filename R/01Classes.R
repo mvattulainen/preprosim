@@ -52,7 +52,7 @@ setClass("preprosimparameter", representation(noisecol="numeric", noiseparam="nu
 #'
 #' Preprosim parameter objects contain eight contaminations: noise, lowvar, misval, irfeature, classswap, classimbalance, volumedecrease and outlier.
 #' Each contamination has three sub parameters: cols as columns the contamination is applied to, param as the
-#' parameter of the contaminations itself (i.e. intensity of contamination) and order as order in which the parameter
+#' parameter of the contamination itself (i.e. intensity of contamination) and order as order in which the parameter
 #' is applied to the data.
 #' @param dataframe (data frame) original data to be used in simulations
 #' @param type (character) creation type: empty, default or custom, defaults to "default"
@@ -60,9 +60,8 @@ setClass("preprosimparameter", representation(noisecol="numeric", noiseparam="nu
 #' @param z (character) secondary contamination of interest such as "noise"
 #' @return preprosimparameter class object
 #' @details For argument type: empty creates a preprosimparameter object with empty params (but not empty cols or order).
-#' default creates an object with 6561 combinations all params c(0, 0.1, 0.2).
-#' custom creates params seq(0, 0.9, by 0.1) for primary (x) and 0., 0.1, 0.2 for secondary (z).
-#' The implicit y refers to classification accuracy.
+#' default creates 6561 combinations with all params 0, 0.1, 0.2. custom creates params seq(0, 0.9, by 0.1) for primary (x)
+#' and 0., 0.1, 0.2 for secondary (z). The implicit y (not an argument) refers to classification accuracy.
 #' @examples
 #' ## res <- newparam(iris)
 #' ## res <- newparam(iris, "empty")

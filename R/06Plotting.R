@@ -94,7 +94,7 @@ preprosimplot <- function(object, type="accuracy", x, z){
 
   }
 
-p
+suppressWarnings(p)
 
 }
 

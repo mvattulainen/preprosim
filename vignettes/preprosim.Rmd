@@ -1,0 +1,50 @@
+---
+title: "Preprosim"
+author: "Markus Vattulainen"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Preprosim}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Data quality simulation can be used to check the robustness of data
+analysis findings and learn about the impact of data quality contaminations on
+classification. This package helps to add contaminations (noise, missing values,
+outliers, low variance, irrelevant features, class swap (inconsistency), class
+imbalance and decrease in data volume) to data and then evaluate the simulated
+data sets for classification accuracy. As a lightweight solution simulation runs
+can be set up with no or minimal up-front effort.
+
+## Quick start
+
+Example 1 (not run):
+
+```{r}
+# library(preprosim)
+# preprosimplot(preprosimrun(iris))
+```
+Boxplot of classification accuracies. 6561 datasets with all eight contaminations
+each having three contamination intensities. Classification accuracies computed 
+with stochastic gradient boosting (gbm) and holdout validated 10 times. 
+Runtime several hours. 
+
+
+Example 2:
+
+Checking the impact of missing values (primary) and noise (secondary) on
+classification accuracy. Iris data, rpart model and two times holdout
+validation.
+ 
+
+```{r, results='hide', message=FALSE, warning=FALSE, fig.width=8}
+library(preprosim)
+res <- preprosimrun(iris, param=newparam(iris, "custom", x="misval", z="noise"), caretmodel="rpart", holdoutrounds = 2, verbose=FALSE)
+preprosimplot(res)
+preprosimplot(res, "xz", x="misval", z="noise")
+```
+
+Adding noise and missing values has a substantial effect on classification accuracy (top).
+The relationship between missing values and classification accuracy in similar in the three
+categories of noise (bottom).
