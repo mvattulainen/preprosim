@@ -32,3 +32,4 @@ Suggests:
 URL: https://github.com/mvattulainen/preprosim
 BugReports: https://github.com/mvattulainen/preprosim/issues
 VignetteBuilder: knitr
+RoxygenNote: 5.0.1

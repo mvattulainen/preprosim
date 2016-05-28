@@ -29,9 +29,9 @@ The order of contaminations (cols parameter) must be between 1 and 8, and no two
 The contamination parameter (param parameter) must start with 0 (e.g. param="param", value=c(0,0.3))
 }
 \examples{
-## res <- newparam()
-## res <- changeparam(res, "noise", "cols", value=1)
-## res <- changeparam(res, "noise", "param", value=c(0,0.1))
-## res <- changeparam(res, "noise", "order", value=1)
+pa <- newparam(iris)
+pa <- changeparam(pa, "noise", "cols", value=1)
+pa <- changeparam(pa, "noise", "param", value=c(0,0.1))
+pa <- changeparam(pa, "noise", "order", value=1)
 }
 

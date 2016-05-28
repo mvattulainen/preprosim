@@ -30,8 +30,8 @@ default creates 6561 combinations with all params 0, 0.1, 0.2. custom creates pa
 and 0., 0.1, 0.2 for secondary (z). The implicit y (not an argument) refers to classification accuracy.
 }
 \examples{
-## res <- newparam(iris)
-## res <- newparam(iris, "empty")
-## res <- newparam(iris, "custom", "misval", "noise")
+pa <- newparam(iris)
+pa1 <- newparam(iris, "empty")
+pa2 <- newparam(iris, "custom", "misval", "noise")
 }
 

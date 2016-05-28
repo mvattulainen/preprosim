@@ -63,9 +63,9 @@ setClass("preprosimparameter", representation(noisecol="numeric", noiseparam="nu
 #' default creates 6561 combinations with all params 0, 0.1, 0.2. custom creates params seq(0, 0.9, by 0.1) for primary (x)
 #' and 0., 0.1, 0.2 for secondary (z). The implicit y (not an argument) refers to classification accuracy.
 #' @examples
-#' ## res <- newparam(iris)
-#' ## res <- newparam(iris, "empty")
-#' ## res <- newparam(iris, "custom", "misval", "noise")
+#' pa <- newparam(iris)
+#' pa1 <- newparam(iris, "empty")
+#' pa2 <- newparam(iris, "custom", "misval", "noise")
 #' @export
 newparam <- function(dataframe, type="default", x, z){
 
@@ -134,10 +134,10 @@ newparam <- function(dataframe, type="default", x, z){
 #' The contamination parameter (param parameter) must start with 0 (e.g. param="param", value=c(0,0.3))
 #'
 #' @examples
-#' ## res <- newparam()
-#' ## res <- changeparam(res, "noise", "cols", value=1)
-#' ## res <- changeparam(res, "noise", "param", value=c(0,0.1))
-#' ## res <- changeparam(res, "noise", "order", value=1)
+#' pa <- newparam(iris)
+#' pa <- changeparam(pa, "noise", "cols", value=1)
+#' pa <- changeparam(pa, "noise", "param", value=c(0,0.1))
+#' pa <- changeparam(pa, "noise", "order", value=1)
 #' @export
 
 changeparam <- function(object, contamination, param, value) {
