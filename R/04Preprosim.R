@@ -3,22 +3,21 @@
 #' @param data (data frame) one factor columns for class labels, other columns numeric, no missing values
 #' @param param (preprosimparameter object) simulation parameters, defaults to parameters set automatically for data.
 #' @param seed (integer) seed to be used for reproducible results, defaults to 1
+#' @param fitmodels (boolean) whether classification models are fitted, defaults to TRUE (FALSE: get only the contaminated datasets)
 #' @param caretmodel (character) a model from package Caret, defaults to gbm (gbm must be installed before preprosimrun)
 #' @param holdoutrounds (integer) number of holdout rounds, defaults to 10
 #' @param cores (integer) number of cores used in parallel processing, defaults to 1
 #' @param verbose (boolean) progress information outputted, defaults to TRUE
 #' @return preprosimanalysis class object
-#' @details caretmodel must be able to deal with missing values and preferably have in-build variable importance
+#' @details caretmodel must be able to deal with missing values and have in-build variable importance
 #' such as rpart and gbm. Note: caret message will be outputted regardless of verbose.
-#' @examples
-#' ## res <- preprosimrun(iris)
-#' ## res1 <- preprosimrun(iris, param=newparam(iris, "custom", x="misval", z="noise"), cores=2)
-#' ## res2 <- preprosimrun(iris, caretmodel="rpart")
+#' @example
+#' res <- preprosimrun(iris, param=newparam(iris, "custom", x="misval", z="noise"), fitmodels=FALSE)
 #' @export
 
-preprosimrun <- function(data, param=newparam(data, "default"), seed=1, caretmodel="gbm", holdoutrounds=10, cores=1, verbose=TRUE) {
+preprosimrun <- function(data, param=newparam(data, "default"), seed=1, caretmodel="gbm", holdoutrounds=10, cores=1, verbose=TRUE, fitmodels=TRUE) {
 
-  doParallel::registerDoParallel(cores=cores)
+  if (!caretmodel %in% c("gbm", "rpart")) {warning("Selected Caret model must be able to deal with missing values and have in-build variable importance score.")}
 
   set.seed(seed)
 
@@ -92,49 +91,58 @@ preprosimrun <- function(data, param=newparam(data, "default"), seed=1, caretmod
 
 ## MODEL FITTING: CLASSIFICATION ACCURACY AND VARIABLE IMPORTANCE
 
-output <- fitmodels(e, caretmodel, holdoutrounds, verbose)
+if (fitmodels==TRUE){
 
-doParallel::stopImplicitCluster()
+    doParallel::registerDoParallel(cores=cores)
 
-###
+    output <- fitmodels(e, caretmodel, holdoutrounds, verbose)
 
-# variable importance
+    doParallel::stopImplicitCluster()
 
-nonemptyelements <- output[[2]][!unlist(lapply(output[[2]], is.null))]
-numofrows <- unlist(lapply(nonemptyelements, nrow))
-longestdf <- which.max(numofrows)
-longestrownames <- rownames(nonemptyelements[[longestdf]])
-lengthlongest <- max(numofrows)
-#lengthdiff <- lengthlongest - numofrows
+    ###
 
-# Create list of empty data frames and name rows
+    # variable importance
 
-emptydf <- data.frame(matrix(nrow=lengthlongest, ncol=1))
-rownames(emptydf) <- longestrownames
-colnames(emptydf) <- "Overall"
+    nonemptyelements <- output[[2]][!unlist(lapply(output[[2]], is.null))]
+    numofrows <- unlist(lapply(nonemptyelements, nrow))
+    longestdf <- which.max(numofrows)
+    longestrownames <- rownames(nonemptyelements[[longestdf]])
+    lengthlongest <- max(numofrows)
+    #lengthdiff <- lengthlongest - numofrows
 
-newlist <- vector("list", length=length(nonemptyelements))
-for (i in 1:length(newlist))
-{
-  newdf <- emptydf
-  newdf[1:numofrows[i], 1] <- nonemptyelements[[i]][,1]
-  newlist[[i]] <- newdf
+    # Create list of empty data frames and name rows to store variable importance scores
+
+    emptydf <- data.frame(matrix(nrow=lengthlongest, ncol=1))
+    rownames(emptydf) <- longestrownames
+    colnames(emptydf) <- "Overall"
+
+    newlist <- vector("list", length=length(nonemptyelements))
+    for (i in 1:length(newlist))
+    {
+      newdf <- emptydf
+      newdf[1:numofrows[i], 1] <- nonemptyelements[[i]][,1]
+      newlist[[i]] <- newdf
+    }
+
+    varimportance <- suppressWarnings(data.frame(t(do.call(cbind, newlist))))
+
+    # outlier score
+    expdata <- data.frame(output[[1]], q)
+    outlier.scores <- DMwR::lofactor(expdata, k=5)
+    outliers <- data.frame(outlier.scores)
+
 }
-
-varimportance <- suppressWarnings(data.frame(t(do.call(cbind, newlist))))
-
-# outlier score
-expdata <- data.frame(output[[1]], q)
-outlier.scores <- DMwR::lofactor(expdata, k=5)
-outliers <- data.frame(outlier.scores)
 
 # analysis object creation
 preprosimobject <- new("preprosimanalysis")
 preprosimobject@grid <- q
 preprosimobject@data <- e
-preprosimobject@output <- output[[1]]
-preprosimobject@variableimportance <- varimportance
-preprosimobject@outliers <- outlier.scores
+
+if (fitmodels==TRUE){
+  preprosimobject@output <- output[[1]]
+  preprosimobject@variableimportance <- varimportance
+  preprosimobject@outliers <- outlier.scores
+}
 
 preprosimobject
 }

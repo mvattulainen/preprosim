@@ -2,6 +2,7 @@
 
 export(changeparam)
 export(getpreprosimdata)
+export(getpreprosimdf)
 export(newparam)
 export(preprosimplot)
 export(preprosimrun)

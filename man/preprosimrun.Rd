@@ -5,7 +5,8 @@
 \title{Run data quality simulation}
 \usage{
 preprosimrun(data, param = newparam(data, "default"), seed = 1,
-  caretmodel = "gbm", holdoutrounds = 10, cores = 1, verbose = TRUE)
+  caretmodel = "gbm", holdoutrounds = 10, cores = 1, verbose = TRUE,
+  fitmodels = TRUE)
 }
 \arguments{
 \item{data}{(data frame) one factor columns for class labels, other columns numeric, no missing values}
@@ -21,6 +22,8 @@ preprosimrun(data, param = newparam(data, "default"), seed = 1,
 \item{cores}{(integer) number of cores used in parallel processing, defaults to 1}
 
 \item{verbose}{(boolean) progress information outputted, defaults to TRUE}
+
+\item{fitmodels}{(boolean) whether classification models are fitted, defaults to TRUE (FALSE: get only the contaminated datasets)}
 }
 \value{
 preprosimanalysis class object

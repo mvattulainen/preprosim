@@ -2,7 +2,7 @@ Package: preprosim
 Type: Package
 Title: Lightweight Data Quality Simulation for Classification
 Version: 0.1.0
-Date: 2016-05-27
+Date: 2016-05-28
 Authors@R: person("Markus", "Vattulainen", email = "markus.vattulainen@gmail.com", role = c("aut", "cre"))
 Description: Data quality simulation can be used to check the robustness of data
     analysis findings and learn about the impact of data quality contaminations on

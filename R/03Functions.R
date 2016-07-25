@@ -109,7 +109,7 @@ classimbalancefunction <- function(data, param){
   q <- as.data.frame(table(class))
   w <- q[order(q$Freq)[1],1]
   e <- which(class==w) # items that belong to the most infrequent class
-  numbertoberemoved <- as.integer(length(e)*0.1) # FIX THIS: param@classimbalance
+  numbertoberemoved <- as.integer(length(e)*param@classimbalanceparam)
   removed <- sample(e, numbertoberemoved)
 
   data@y <- data@y[-removed]

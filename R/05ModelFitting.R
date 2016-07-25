@@ -42,7 +42,7 @@ for (i in 1:length(e))
           prediction <- predict(modres, newdata=intest, na.action = na.pass)
           accuracy <- mean(prediction==intest$class) # accuracy[j]
 
-          }, error= function(e) return({accuracy[j] <- NA}) )
+          }, error= function(e) return({accuracy <- NA}) )
 
         }
       output[i] <- mean(accuracy)

@@ -273,7 +273,8 @@ validatedata <- function(data){
 #'@slot output (numeric) vector of classification accuracies
 #'@slot variableimportance (data frame) data frame consisting of variable importance values
 #'@slot outliers (numeric) vector of outlier scores
-setClass("preprosimanalysis", representation(grid="data.frame", data="list", output="numeric", variableimportance="data.frame", outliers="numeric"))
+setClass("preprosimanalysis", representation(grid="data.frame", data="list", output="numeric", variableimportance="data.frame", outliers="numeric"),
+         prototype(output=NULL, variableimportance=NULL, outliers=NULL))
 
 
 

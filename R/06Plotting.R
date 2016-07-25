@@ -14,6 +14,8 @@
 
 getpreprosimdata <- function(object, type="accuracy", x, z){
 
+  if (is.null(object@output)) {stop("Model was not fitted by preprosimrun function. There are no results that can be plotted.")}
+
   if (type=="accuracy") {
 
     plotdata <- data.frame(accuracy=object@output)
@@ -51,6 +53,35 @@ getpreprosimdata <- function(object, type="accuracy", x, z){
   plotdata
 
 }
+
+#' get contaminated data frame corresponding to a combination of contaminations
+#' @param object (preprosimanalysis class object) object to be plotted
+#' @param paramvector (numeric) contamination combinations to be searched for
+#' @examples
+#' ## res <- preprosimrun(iris)
+#' ## df <- preprosimdf(res, c(0,0,0,0,0,0,0,0)) # returns uncontaminated original data set
+#' @export
+
+getpreprosimdf <- function(object, paramvector){
+
+  if (length(paramvector)!=8){stop("Argument 'param' must be a numeric vector of length eight, one parameter for each contamination.")}
+
+  row.is.a.match <- apply(object@grid, 1, function(x) identical(as.numeric(paste(x)), paramvector))
+  match.idx <- which(row.is.a.match)
+
+  if (length(match.idx)==0){stop("There were no contamination combinations matching parameter 'param'. Please, check yourobjectname@grid")}
+
+  s4data <- object@data[[match.idx]]
+  data <- data.frame(x=s4data@x, y=s4data@y)
+
+}
+
+
+
+
+
+
+
 
 #' Plot data quality simulation results
 #' @param type (character) type of plot: accuracy, varimportance, outliers or xz; defaults to accuracy
