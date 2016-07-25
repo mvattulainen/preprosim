@@ -2,7 +2,7 @@
 % Please edit documentation in R/01Classes.R
 \name{newparam}
 \alias{newparam}
-\title{Create new preprosimparameter object}
+\title{Create new simulation control parameter object}
 \usage{
 newparam(dataframe, type = "default", x, z)
 }

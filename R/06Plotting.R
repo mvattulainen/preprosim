@@ -1,5 +1,5 @@
 
-#' Get the analysis results
+#' Get simulation run result data
 #' @param type (character) type of data: accuracy, varimportance, outliers or xz
 #' @param object (preprosimanalysis class object) object
 #' @param x (character) x axis contamination
@@ -54,7 +54,7 @@ getpreprosimdata <- function(object, type="accuracy", x, z){
 
 }
 
-#' get contaminated data frame corresponding to a combination of contaminations
+#' Get a contaminated data frame
 #' @param object (preprosimanalysis class object) object to be plotted
 #' @param paramvector (numeric) contamination combinations to be searched for
 #' @examples
@@ -83,7 +83,7 @@ getpreprosimdf <- function(object, paramvector){
 
 
 
-#' Plot data quality simulation results
+#' Plot simulation run results
 #' @param type (character) type of plot: accuracy, varimportance, outliers or xz; defaults to accuracy
 #' @param object (preprosimanalysis class object) object to be plotted
 #' @param x (character) x axis contamination

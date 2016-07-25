@@ -48,7 +48,7 @@ setClass("preprosimparameter", representation(noisecol="numeric", noiseparam="nu
                    volumedecreasefunction="volumedecreasefunction(data, param)", outlierfunction="outlierfunction(data, param)")
 )
 
-#' Create new preprosimparameter object
+#' Create new simulation control parameter object
 #'
 #' Preprosim parameter objects contain eight contaminations: noise, lowvar, misval, irfeature, classswap, classimbalance, volumedecrease and outlier.
 #' Each contamination has three sub parameters: cols as columns the contamination is applied to, param as the
@@ -119,7 +119,7 @@ newparam <- function(dataframe, type="default", x, z){
   object
 }
 
-#' Change preprosimparametes
+#' Change simulation control parameter object
 #'
 #' Preprosim parameter objects contain eight contaminations: noise, lowvar, misval, irfeature, classswap, classimbalance, volumedecrease and outlier.
 #' Each contamination has three sub parameters: cols as columns the contamination is applied to, param as the
@@ -238,6 +238,7 @@ getexecutionorder <- function(object){
 #'@slot x (data frame) data frame consisting of numeric features
 #'@slot y (factor) vector of class labels
 #'@slot z (boolean) safe for classification (i.e. no NAs)
+#'@keywords internal
 
 setClass("preprosimdata", representation(x="data.frame", y="factor",z="logical"))
 

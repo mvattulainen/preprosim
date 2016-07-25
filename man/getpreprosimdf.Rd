@@ -2,7 +2,7 @@
 % Please edit documentation in R/06Plotting.R
 \name{getpreprosimdf}
 \alias{getpreprosimdf}
-\title{get contaminated data frame corresponding to a combination of contaminations}
+\title{Get a contaminated data frame}
 \usage{
 getpreprosimdf(object, paramvector)
 }
@@ -12,7 +12,7 @@ getpreprosimdf(object, paramvector)
 \item{paramvector}{(numeric) contamination combinations to be searched for}
 }
 \description{
-get contaminated data frame corresponding to a combination of contaminations
+Get a contaminated data frame
 }
 \examples{
 ## res <- preprosimrun(iris)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/01Classes.R
 \name{changeparam}
 \alias{changeparam}
-\title{Change preprosimparametes}
+\title{Change simulation control parameter object}
 \usage{
 changeparam(object, contamination, param, value)
 }

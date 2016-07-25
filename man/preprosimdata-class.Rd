@@ -16,4 +16,5 @@ An S4 class to represent preprosim data
 
 \item{\code{z}}{(boolean) safe for classification (i.e. no NAs)}
 }}
+\keyword{internal}
 

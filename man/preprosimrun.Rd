@@ -2,7 +2,7 @@
 % Please edit documentation in R/04Preprosim.R
 \name{preprosimrun}
 \alias{preprosimrun}
-\title{Run data quality simulation}
+\title{Run simulation}
 \usage{
 preprosimrun(data, param = newparam(data, "default"), seed = 1,
   caretmodel = "gbm", holdoutrounds = 10, cores = 1, verbose = TRUE,
@@ -29,15 +29,13 @@ preprosimrun(data, param = newparam(data, "default"), seed = 1,
 preprosimanalysis class object
 }
 \description{
-Run data quality simulation
+Run simulation
 }
 \details{
-caretmodel must be able to deal with missing values and preferably have in-build variable importance
+caretmodel must be able to deal with missing values and have in-build variable importance
 such as rpart and gbm. Note: caret message will be outputted regardless of verbose.
 }
 \examples{
-## res <- preprosimrun(iris)
-## res1 <- preprosimrun(iris, param=newparam(iris, "custom", x="misval", z="noise"), cores=2)
-## res2 <- preprosimrun(iris, caretmodel="rpart")
+res <- preprosimrun(iris, param=newparam(iris, "custom", x="misval", z="noise"), fitmodels=FALSE)
 }
 

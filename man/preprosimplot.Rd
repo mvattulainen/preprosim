@@ -2,7 +2,7 @@
 % Please edit documentation in R/06Plotting.R
 \name{preprosimplot}
 \alias{preprosimplot}
-\title{Plot data quality simulation results}
+\title{Plot simulation run results}
 \usage{
 preprosimplot(object, type = "accuracy", x, z)
 }
@@ -16,7 +16,7 @@ preprosimplot(object, type = "accuracy", x, z)
 \item{z}{(character) z axis contamination plotted as panels}
 }
 \description{
-Plot data quality simulation results
+Plot simulation run results
 }
 \details{
 contaminations are : noise, lowvar, misval, irfeature, classswap, classimbalance, volumedecrease, outlier

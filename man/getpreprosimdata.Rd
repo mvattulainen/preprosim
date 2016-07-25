@@ -2,7 +2,7 @@
 % Please edit documentation in R/06Plotting.R
 \name{getpreprosimdata}
 \alias{getpreprosimdata}
-\title{Get the analysis results}
+\title{Get simulation run result data}
 \usage{
 getpreprosimdata(object, type = "accuracy", x, z)
 }
@@ -16,7 +16,7 @@ getpreprosimdata(object, type = "accuracy", x, z)
 \item{z}{(character) z axis contamination}
 }
 \description{
-Get the analysis results
+Get simulation run result data
 }
 \details{
 contaminations are : noise, lowvar, misval, irfeature, classswap, classimbalance, volumedecrease, outlier

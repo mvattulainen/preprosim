@@ -24,7 +24,7 @@ can be set up with no or minimal up-front effort.
 The package can be used to create contaminated data sets. Preprosimrun() is the main execution function and its 
 default settings create 6561 contaminated data sets. In the example below argument 'fitmodels' is set to FALSE 
 (not to compute classification accuracies) and default setup is used 
-(=argument 'param' is not given).
+(argument 'param' is not given).
 
 ```{r}
 library(preprosim)
@@ -161,7 +161,7 @@ pa <- changeparam(pa, "noise", "order", value=1)
 ## Supporting packages
 
 The data quality of a contaminated data set can be visualized with package preproviz.
-In the example below the data frame acquired above is visualized for data quality issue
+In the example below the data frame 'df' acquired above is visualized for data quality issue
 interdependencies.
 
 ```{r, results='hide', message=FALSE, warning=FALSE, fig.width=8}
@@ -170,7 +170,7 @@ viz <- preproviz(df)
 plotVARCLUST(viz)
 ```
 
-In a similar manner the same data frame acquired above could be preprocesssed for
+In a similar manner the same data frame 'df' acquired above could be preprocesssed for
 optimal classification accuracy with package preprocomb.
 
 ```{r, eval=FALSE}

@@ -1,5 +1,5 @@
 
-#' Run data quality simulation
+#' Run simulation
 #' @param data (data frame) one factor columns for class labels, other columns numeric, no missing values
 #' @param param (preprosimparameter object) simulation parameters, defaults to parameters set automatically for data.
 #' @param seed (integer) seed to be used for reproducible results, defaults to 1
@@ -11,7 +11,7 @@
 #' @return preprosimanalysis class object
 #' @details caretmodel must be able to deal with missing values and have in-build variable importance
 #' such as rpart and gbm. Note: caret message will be outputted regardless of verbose.
-#' @example
+#' @examples
 #' res <- preprosimrun(iris, param=newparam(iris, "custom", x="misval", z="noise"), fitmodels=FALSE)
 #' @export
 
