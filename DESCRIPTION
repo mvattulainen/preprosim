@@ -21,10 +21,10 @@ Imports:
     stats,
     caret,
     doParallel,
-    foreach
+    foreach,
+    e1071
 Suggests:
     gbm,
-    testthat,
     preprocomb,
     preproviz,
     knitr,
