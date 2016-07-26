@@ -3,9 +3,9 @@
 \docType{class}
 \name{preprosimdata-class}
 \alias{preprosimdata-class}
-\title{An S4 class to represent preprosim data}
+\title{An S4 class representing preprosim data}
 \description{
-An S4 class to represent preprosim data
+An S4 class representing preprosim data
 }
 \section{Slots}{
 

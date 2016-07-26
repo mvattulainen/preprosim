@@ -181,5 +181,3 @@ result@bestclassification
 ```
  
 For further information, please see package preproviz and preprocomb vignettes.
-
-

@@ -3,9 +3,9 @@
 \docType{class}
 \name{preprosimanalysis-class}
 \alias{preprosimanalysis-class}
-\title{An S4 class to represent preprosim analysis output}
+\title{An S4 class representing simulation run results}
 \description{
-An S4 class to represent preprosim analysis output
+An S4 class representing simulation run results
 }
 \section{Slots}{
 

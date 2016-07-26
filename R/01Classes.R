@@ -1,6 +1,6 @@
 # S4: preprosim parameter class
 
-#' An S4 class to represent preprosim parameters
+#' An S4 class representing simulation control parameters
 #'
 #'@slot noisecol (numeric)
 #'@slot noiseparam (numeric)
@@ -233,7 +233,7 @@ getexecutionorder <- function(object){
   exeorder
 }
 
-#' An S4 class to represent preprosim data
+#' An S4 class representing preprosim data
 #'
 #'@slot x (data frame) data frame consisting of numeric features
 #'@slot y (factor) vector of class labels
@@ -267,7 +267,7 @@ validatedata <- function(data){
 }
 
 
-#' An S4 class to represent preprosim analysis output
+#' An S4 class representing simulation run results
 #'
 #'@slot grid (data frame) data frame consisting of combinations of preprosimparameters
 #'@slot data (list) list of simulated data sets
